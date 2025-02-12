@@ -8,6 +8,10 @@ import com.guisso.orderservice.model.Order;
 import com.guisso.orderservice.model.OrderStatus;
 import com.guisso.orderservice.repository.OrderRepository;
 import lombok.extern.slf4j.Slf4j;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,7 +49,11 @@ public class OrderConsumerService {
             double total = order.getProducts().stream()
                     .mapToDouble(product -> product.getPrice())
                     .sum();
-            order.setTotalAmount(total);
+            // Arredondar para duas casas decimais
+            BigDecimal totalArredondado = BigDecimal.valueOf(total)
+                    .setScale(2, RoundingMode.HALF_UP);
+            order.setTotalAmount(totalArredondado.doubleValue());
+            
             log.info("Valor total calculado para o pedido {}: {}", order.getId(), total);
  
             //Definir status do pedido

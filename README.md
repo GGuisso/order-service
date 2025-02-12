@@ -76,7 +76,7 @@ A aplicação estará disponível em [http://localhost:8080](http://localhost:80
 
 ### Opção 2: Executando com Docker Compose
 
-Você pode utilizar o Docker Compose para rodar contêineres do MongoDB e RabbitMQ.
+Você pode utilizar o Docker Compose para rodar contêineres do Redis, MongoDB e RabbitMQ.
 
 1. **Crie um arquivo `docker-compose.yml` na raiz do projeto com o seguinte conteúdo:**
 
@@ -96,6 +96,14 @@ Você pode utilizar o Docker Compose para rodar contêineres do MongoDB e Rabbit
        ports:
          - 5672:5672
          - 15672:15672
+     
+     redis:
+        image: redis
+        restart: always
+        ports:
+          - 6379:6379
+        command: redis-server --loglevel warning
+        
    ```
 
 2. **Inicie os contêineres:**

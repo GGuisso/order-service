@@ -12,3 +12,10 @@ services:
     ports:
       - 15672:15672
       - 5672:5672
+      
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - 6379:6379
+    command: redis-server --loglevel warning

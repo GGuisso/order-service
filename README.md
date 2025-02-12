@@ -2,6 +2,8 @@
 
 O **Order Service** é um microserviço Spring Boot responsável pelo gerenciamento de pedidos. Ele recebe pedidos através de uma API REST, envia-os para processamento assíncrono via RabbitMQ e persiste os dados no MongoDB. Além disso, a aplicação utiliza Redis para cache, expõe endpoints de monitoramento com o Actuator e documenta a API com Swagger.
 
+![Diagrama do Order Service](https://github.com/GGuisso/order-service/blob/master/local/Fluxograma_order.png)
+
 ## Sumário
 
 - [Tecnologias](#tecnologias)
